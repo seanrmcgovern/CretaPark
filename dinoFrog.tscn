@@ -1,0 +1,186 @@
+[gd_scene load_steps=23 format=3 uid="uid://daq1unbhrtx04"]
+
+[ext_resource type="Script" path="res://dinoFrog.gd" id="1_0d3xf"]
+[ext_resource type="Texture2D" uid="uid://bwfqkom72kdyw" path="res://Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-1.png" id="1_f8efy"]
+[ext_resource type="Texture2D" uid="uid://wbedir0ywmsl" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-1.png" id="1_kq75i"]
+[ext_resource type="Texture2D" uid="uid://eoys0ig7xtaa" path="res://Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-2.png" id="2_fwha6"]
+[ext_resource type="Shader" uid="uid://cyd4mjcka1fr7" path="res://common/shaders/hitFlash.tres" id="2_m067d"]
+[ext_resource type="Texture2D" uid="uid://d170t72edbhsn" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-2.png" id="2_pj6rj"]
+[ext_resource type="Texture2D" uid="uid://d300hnq00ju8k" path="res://Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-3.png" id="3_nuflu"]
+[ext_resource type="Texture2D" uid="uid://d37dh7yptbavp" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-3.png" id="3_vkyky"]
+[ext_resource type="Texture2D" uid="uid://b6awnrhumdjlj" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-4.png" id="4_i2w0l"]
+[ext_resource type="Texture2D" uid="uid://bn7cnqino42xx" path="res://Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-4.png" id="4_so51g"]
+[ext_resource type="Texture2D" uid="uid://7ih3h22dwpgy" path="res://Sunny-land-files/Graphical Assets/sprites/frog/jump/frog-jump-1.png" id="5_55082"]
+[ext_resource type="Texture2D" uid="uid://bi6uju8nsj40f" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-5.png" id="5_yv0ie"]
+[ext_resource type="Texture2D" uid="uid://bwufyhgaf02u6" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-6.png" id="6_06p71"]
+[ext_resource type="Texture2D" uid="uid://cx1ri1h3bhxwo" path="res://Sunny-land-files/Graphical Assets/sprites/frog/jump/frog-jump-2.png" id="6_g2mvw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mj01j"]
+resource_local_to_scene = true
+shader = ExtResource("2_m067d")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_opcr5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kq75i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_pj6rj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vkyky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_i2w0l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yv0ie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_06p71")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_f8efy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fwha6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nuflu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_so51g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_f8efy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_f8efy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_f8efy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_f8efy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_f8efy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_f8efy")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_f8efy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_55082")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_g2mvw")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m2wg2"]
+size = Vector2(29, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sufp4"]
+size = Vector2(20, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cp67"]
+size = Vector2(25, 18.5)
+
+[sub_resource type="Animation" id="Animation_lxry5"]
+resource_name = "HitFlash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_u7igh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8shiw"]
+_data = {
+"HitFlash": SubResource("Animation_lxry5"),
+"RESET": SubResource("Animation_u7igh")
+}
+
+[node name="DinoFrog" type="CharacterBody2D"]
+position = Vector2(0, -11)
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_0d3xf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_mj01j")
+sprite_frames = SubResource("SpriteFrames_opcr5")
+animation = &"Idle"
+metadata/_edit_lock_ = true
+
+[node name="ObjectCollision" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectCollision"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_m2wg2")
+
+[node name="GroundCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 11)
+shape = SubResource("RectangleShape2D_sufp4")
+
+[node name="DinoFrogCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1.75)
+shape = SubResource("RectangleShape2D_2cp67")
+
+[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8shiw")
+}
+
+[node name="HPLabel" type="Label" parent="."]
+visible = false
+offset_left = -34.0
+offset_top = -31.0
+offset_right = 36.0
+offset_bottom = -8.0
+text = "Collision:"
+
+[connection signal="body_entered" from="ObjectCollision" to="." method="_on_object_collision_body_entered"]

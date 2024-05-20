@@ -1,0 +1,190 @@
+[gd_scene load_steps=23 format=3 uid="uid://b4fiwuqsy4pqd"]
+
+[ext_resource type="Script" path="res://compy.gd" id="1_eoanr"]
+[ext_resource type="Texture2D" uid="uid://cefvcht6f23iy" path="res://creataSprites/compyIdle/compy-idle-0.png" id="1_ndffx"]
+[ext_resource type="Shader" uid="uid://cyd4mjcka1fr7" path="res://common/shaders/hitFlash.tres" id="2_ibapv"]
+[ext_resource type="Texture2D" uid="uid://s7tpgn74ycsl" path="res://creataSprites/compyIdle/compy-idle-1.png" id="2_uxsth"]
+[ext_resource type="Texture2D" uid="uid://xp31kl7x6fim" path="res://creataSprites/compyDeath/compy-death-0.png" id="3_2muvj"]
+[ext_resource type="Texture2D" uid="uid://ddurxponf52k3" path="res://creataSprites/compyRun/compy-run-0.png" id="4_ocb56"]
+[ext_resource type="Texture2D" uid="uid://cyaj8lpgpbamh" path="res://creataSprites/compyDeath/compy-death-1.png" id="4_tlfei"]
+[ext_resource type="Texture2D" uid="uid://bx2wiytqtiwtj" path="res://creataSprites/compyRun/compy-run-1.png" id="5_4xjgd"]
+[ext_resource type="Texture2D" uid="uid://youncfcac4y" path="res://creataSprites/compyRun/compy-run-2.png" id="6_xq3tn"]
+[ext_resource type="Texture2D" uid="uid://1r3s7vsydmlr" path="res://creataSprites/compyRun/compy-run-3.png" id="7_p8c76"]
+[ext_resource type="Texture2D" uid="uid://dildkofvo1tnv" path="res://creataSprites/compyRun/compy-run-4.png" id="8_a4wdj"]
+[ext_resource type="Texture2D" uid="uid://deht2436tq6ex" path="res://creataSprites/compyRun/compy-run-5.png" id="9_5aqgm"]
+[ext_resource type="PackedScene" uid="uid://cpynhkadwf07i" path="res://hazardArea.tscn" id="10_oumgh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rj4t"]
+size = Vector2(22, 12)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3dxea"]
+resource_local_to_scene = true
+shader = ExtResource("2_ibapv")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_24s8r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2muvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tlfei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2muvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tlfei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2muvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tlfei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2muvj")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ndffx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ndffx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ndffx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_uxsth")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_uxsth")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_uxsth")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ocb56")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4xjgd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xq3tn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_p8c76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_a4wdj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_5aqgm")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qpdrq"]
+radius = 114.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_11ggh"]
+size = Vector2(20, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06u1l"]
+size = Vector2(21, 11)
+
+[sub_resource type="Animation" id="Animation_6pxa6"]
+resource_name = "HitFlash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_dmvac"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nemwc"]
+_data = {
+"HitFlash": SubResource("Animation_6pxa6"),
+"RESET": SubResource("Animation_dmvac")
+}
+
+[node name="Compy" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_eoanr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -6)
+shape = SubResource("RectangleShape2D_8rj4t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_3dxea")
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_24s8r")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+shape = SubResource("CircleShape2D_qpdrq")
+
+[node name="HazardArea" parent="." instance=ExtResource("10_oumgh")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardArea"]
+position = Vector2(1, -5.5)
+shape = SubResource("RectangleShape2D_11ggh")
+
+[node name="ProjectileDetection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileDetection"]
+position = Vector2(0.5, -5.5)
+shape = SubResource("RectangleShape2D_06u1l")
+
+[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nemwc")
+}
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]
+[connection signal="body_entered" from="ProjectileDetection" to="." method="_on_projectile_detection_body_entered"]

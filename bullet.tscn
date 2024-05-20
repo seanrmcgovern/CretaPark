@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://djqgnpinx6nlu"]
+
+[ext_resource type="Texture2D" uid="uid://cxiacomnvogbh" path="res://creataSprites/bullet/bullet.png" id="1_8qwq8"]
+[ext_resource type="Script" path="res://bullet.gd" id="1_cg0vo"]
+[ext_resource type="Texture2D" uid="uid://b5nt861u2ittu" path="res://creataSprites/bullet/bullet-collide-0.png" id="2_j215b"]
+[ext_resource type="Texture2D" uid="uid://spw1st74mj83" path="res://creataSprites/bullet/bullet-collide-1.png" id="3_2qlpu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b1ab7"]
+radius = 3.0
+height = 8.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oxssr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j215b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2qlpu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_j215b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2qlpu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_j215b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2qlpu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_j215b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2qlpu")
+}],
+"loop": false,
+"name": &"Explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8qwq8")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 32
+script = ExtResource("1_cg0vo")
+
+[node name="BulletArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 13
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BulletArea"]
+polygon = PackedVector2Array(-3, -3, 2, -3, 2, -2, 3, -2, 3, -1, 4, -1, 4, 3, 3, 3, 3, 4, 2, 4, 2, 5, -3, 5, -3, 4, -4, 4, -4, 3, -5, 3, -5, -1, -4, -1, -4, -2, -3, -2)
+
+[node name="BulletCollision" type="CollisionShape2D" parent="."]
+top_level = true
+position = Vector2(-0.5, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_b1ab7")
+
+[node name="BulletDespawnTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.5, 0.5)
+scale = Vector2(0.71875, 0.71875)
+sprite_frames = SubResource("SpriteFrames_oxssr")
+animation = &"Explode"
+autoplay = "Idle"
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="BulletArea" to="." method="_on_bullet_collision_body_entered"]
