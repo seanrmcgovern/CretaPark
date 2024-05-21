@@ -38,7 +38,7 @@ func _physics_process(delta):
 
 func _on_bullet_collision_body_entered(body):
 	if (body.name != Common.Body.BULLET):
-		bulletAnimatedSprite.play("Explode")
+		bulletAnimatedSprite.play(Common.SpriteAnimation.EXPLODE)
 		bulletIsExploded = true
 		await bulletAnimatedSprite.animation_finished
 		self.queue_free()

@@ -33,16 +33,16 @@ func _physics_process(delta):
 		else:
 			compyAnimatedSprite.flip_h = false
 		velocity.x = direction.x * SPEED
-		compyAnimatedSprite.play("Run")
+		compyAnimatedSprite.play(Common.SpriteAnimation.RUN)
 	else:
-		if compyAnimatedSprite.animation != "Death":
-			compyAnimatedSprite.play("Idle")
+		if compyAnimatedSprite.animation != Common.SpriteAnimation.DEATH:
+			compyAnimatedSprite.play(Common.SpriteAnimation.IDLE)
 		velocity.x = 0
 
 	move_and_slide()
 
 func _on_player_detection_body_entered(body):
-	if body.name == Common.Body.PLAYER && compyAnimatedSprite.animation != "Death":
+	if body.name == Common.Body.PLAYER && compyAnimatedSprite.animation != Common.SpriteAnimation.DEATH:
 		chase = true
 
 func _on_player_detection_body_exited(body):
@@ -70,6 +70,6 @@ func death():
 	chase = false
 	# use the below line if we want player collisions with dinos
 	#get_node("CollisionShape2D").set_deferred("disabled", true)
-	compyAnimatedSprite.play("Death")
+	compyAnimatedSprite.play(Common.SpriteAnimation.DEATH)
 	await compyAnimatedSprite.animation_finished
 	self.queue_free()

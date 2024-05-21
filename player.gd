@@ -13,8 +13,11 @@ class_name Player
 @onready var collisionShape: CollisionShape2D = $CollisionShape2D
 @onready var crouchRayCast1: RayCast2D = $CrouchRayCast1
 @onready var crouchRayCast2: RayCast2D = $CrouchRayCast2
+@onready var bulletTimer: Timer = $BulletTimer
 @onready var iFramesTimer: Timer = $InvincibilityFramesTimer
 @onready var hazardDetectorCollisionShape: CollisionShape2D = $HazardDetector/HazardDetectorCollisionShape2D
+@onready var leftMarker: Marker2D = $LeftMarker
+@onready var rightMarker: Marker2D = $RightMarker
 
 var standing_hitbox = preload("res://hitboxes/player_standing_hitbox.tres")
 var crouching_hitbox = preload("res://hitboxes/player_crouching_hitbox.tres")
@@ -43,7 +46,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	# action logic
-	if Input.is_action_pressed("shoot"):
+	if Input.is_action_pressed(Common.Action.SHOOT):
 		shoot()
 	else:
 		isShooting = false
@@ -72,21 +75,20 @@ const bulletPath = preload('res://bullet.tscn')
 
 func shoot():
 	isShooting = true
-	var bulletTimer = get_node("BulletTimer")
 	# bulletTimer used to limit rate of firing bullets
 	if bulletTimer.is_stopped() and Game.ammo > 0:
 		bulletTimer.start()
 		var bullet = bulletPath.instantiate()
 		get_parent().add_child(bullet)
 		var playerFlipped: bool = playerAnimatedSprite.flip_h
-		bullet.position = get_node("LeftMarker").global_position if playerFlipped else get_node("RightMarker").global_position
+		bullet.position = leftMarker.global_position if playerFlipped else rightMarker.global_position
 		var bulletVelocity = -1 if playerFlipped else 1
 		bullet.velocity = Vector2(bulletVelocity, 0)
 
 func _on_hazard_detector_area_entered(area):
 	# damage could differ between various hazards
 	print_debug("hazard area entered: ", area.name)
-	if area.name == "HazardArea":
+	if area.name == Common.Hazard.HAZARDAREA:
 		Game.playerHP -= 2
 		
 	processDamage()

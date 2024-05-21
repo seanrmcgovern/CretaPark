@@ -9,10 +9,10 @@ const DAMAGE_VELOCITY: float = -200.0
 
 func enter():
 	player.velocity.y = DAMAGE_VELOCITY
-	animationPlayer.play("Fall")
+	animationPlayer.play(Common.SpriteAnimation.FALL)
 
 func stateProcess(delta):
 	if (player.is_on_floor()):
-		TransitionStates.emit(self, crouchState if Input.is_action_pressed("down") else landingState)
+		TransitionStates.emit(self, crouchState if Input.is_action_pressed(Common.Action.DOWN) else landingState)
 	if player.direction && canMove:
 		player.velocity.x = player.direction * SPEED

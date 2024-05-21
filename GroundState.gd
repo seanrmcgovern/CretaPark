@@ -17,7 +17,7 @@ var standUpAnimationInProgress: bool = false
 
 func enter():
 	if previousState is CrouchState:
-		animationPlayer.play("StandUp")
+		animationPlayer.play(Common.SpriteAnimation.STANDUP)
 		standUpAnimationInProgress = true
 		player.velocity.x = 0
 		
@@ -25,27 +25,26 @@ func exit():
 	standUpAnimationInProgress = false
 
 func stateInput(event: InputEvent):
-	if event.is_action_pressed("jump") && player.isSpaceAboveFree():
+	if event.is_action_pressed(Common.Action.JUMP) && player.isSpaceAboveFree():
 		TransitionStates.emit(self, jumpState)
 
 func stateProcess(delta):
 	if !player.is_on_floor():
 		TransitionStates.emit(self, jumpState)
-	elif Input.is_action_pressed("down"):
+	elif Input.is_action_pressed(Common.Action.DOWN):
 		TransitionStates.emit(self, crouchState)
 	elif !standUpAnimationInProgress:
 		if player.direction && canMove:
 			player.velocity.x = player.direction * SPEED
-			animationPlayer.play("Run")
+			animationPlayer.play(Common.SpriteAnimation.RUN)
 		else:
 			player.velocity.x = move_toward(player.velocity.x, 0, SPEED)
 			if player.isShooting:
-				animationPlayer.play("FaceForwardAndShoot")
+				animationPlayer.play(Common.SpriteAnimation.SHOOTFORWARD)
 			else:
-				animationPlayer.play("Idle")
+				animationPlayer.play(Common.SpriteAnimation.IDLE)
 
 
 func _on_animation_player_animation_finished(anim_name):
-	# TODO: Make enum for animations
-	if anim_name == "StandUp":
+	if anim_name == Common.SpriteAnimation.STANDUP:
 		standUpAnimationInProgress = false
