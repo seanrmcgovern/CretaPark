@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 # TODO:
 # add state machine, chase state
-# add outlines to compy run sprites
 # could have dinos drop randomized amount of bones or other materials
 # could drop randomized types of bones, meant to inspire the player to collect
 # the entire fossil
@@ -18,6 +17,7 @@ var chase: bool = false
 # which is faster than getting the nodes each frame, it makes a bigger difference than the NodePaths alone
 @onready var hitFlashAnimPlayer: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var compyAnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var hazardAreaCollisionShape: CollisionShape2D = $HazardArea/CollisionShape2D
 @onready var player: Player = get_node("../Player")
 
 func _physics_process(delta):
@@ -68,8 +68,8 @@ func death():
 	Game.gold += 5
 	Utils.saveGame()
 	chase = false
-	# use the below line if we want player collisions with dinos
-	#get_node("CollisionShape2D").set_deferred("disabled", true)
+	# disale hazard area collision shape so player does not take damage during animation
+	hazardAreaCollisionShape.set_deferred("disabled", true)
 	compyAnimatedSprite.play(Common.SpriteAnimation.DEATH)
 	await compyAnimatedSprite.animation_finished
 	self.queue_free()

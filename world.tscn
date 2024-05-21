@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cd3o72y5cirq2" path="res://sunny-land/assets/environment/tileset.png" id="1_tkr1h"]
 [ext_resource type="Script" path="res://background.gd" id="1_vunxt"]
-[ext_resource type="Texture2D" uid="uid://cn3bp0xninsy5" path="res://creataSprites/environment/main/floor0.png" id="2_re3fj"]
+[ext_resource type="Texture2D" uid="uid://56ffcdf4ei4c" path="res://creataSprites/environment/main/floor0.png" id="2_re3fj"]
 [ext_resource type="Texture2D" uid="uid://m51l151fj2qn" path="res://Sunny-land-files/Graphical Assets/environment/Background/back.png" id="2_uo6yo"]
 [ext_resource type="FontFile" uid="uid://dv2fd8yy11i6m" path="res://Fonts/Micro5-Regular.ttf" id="5_ypdur"]
 [ext_resource type="PackedScene" uid="uid://doowqhfhylqpp" path="res://Collectibles/Cherry.tscn" id="6_4dqvp"]

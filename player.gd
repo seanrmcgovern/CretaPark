@@ -90,7 +90,7 @@ func _on_hazard_detector_area_entered(area):
 	print_debug("hazard area entered: ", area.name)
 	if area.name == Common.Hazard.HAZARDAREA:
 		Game.playerHP -= 2
-		
-	processDamage()
+		processDamage()
+
 	Utils.saveGame()
 
