@@ -14,21 +14,24 @@ func _ready():
 			states.append(child)
 			child.player = player
 			child.animationPlayer = animationPlayer
+			# connect the transition signal
+			child.TransitionStates.connect(transitionStates)
 		else:
 			push_warning("Child: " + child.name + " is not a valid state for the PlayerStateMachine")
 
 func _physics_process(delta):
-	if (currentState.nextState != null):
-		switchStates(currentState.nextState) 
 	currentState.stateProcess(delta)
-
-func switchStates(newState: State):
+	
+func transitionStates(curState: State, newState: State):
 	var previousState: State
+	# return if the current state does not match the passed curState
+	if currentState != curState:
+		return
+	# handle current state
 	if (currentState != null):
 		currentState.exit()
-		currentState.nextState = null
 		previousState = currentState
-	
+	# update current state with newState
 	currentState = newState
 	currentState.previousState = previousState
 	currentState.enter()

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 # TODO:
+# add state machine, chase state
 # add outlines to compy run sprites
 # could have dinos drop randomized amount of bones or other materials
 # could drop randomized types of bones, meant to inspire the player to collect

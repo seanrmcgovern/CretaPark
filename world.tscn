@@ -570,12 +570,12 @@ wait_time = 5.0
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("6_ibvdt")]
-position = Vector2(265, 209)
+position = Vector2(212, 288)
 
 [node name="StaticBodyCrouchingTest" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodyCrouchingTest"]
-position = Vector2(97, 241)
+position = Vector2(97, 242)
 shape = SubResource("RectangleShape2D_0f5iy")
 
 [node name="KeyCard" parent="." instance=ExtResource("9_xamxm")]

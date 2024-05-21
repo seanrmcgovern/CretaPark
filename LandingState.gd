@@ -17,17 +17,17 @@ func exit():
 
 func stateProcess(delta):
 	if !player.is_on_floor():
-		nextState = jumpState
+		TransitionStates.emit(self, jumpState)
 	elif Input.is_action_pressed("down"):
-		nextState = crouchState
+		TransitionStates.emit(self, crouchState)
 	elif (player.direction):
-		nextState = groundState
+		TransitionStates.emit(self, groundState)
 		
 func stateInput(event: InputEvent):
 	if event.is_action_pressed("jump") && player.isSpaceAboveFree():
-		player.jump()
+		TransitionStates.emit(self, jumpState)
 
 # listen to signal for end of landing animation to queue groundState
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "Land":
-		nextState = groundState
+		TransitionStates.emit(self, groundState)

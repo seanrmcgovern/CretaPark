@@ -27,14 +27,13 @@ func exit():
 
 func stateInput(event: InputEvent):
 	if event.is_action_pressed("jump") && player.isSpaceAboveFree():
-		player.jump()
+		TransitionStates.emit(self, jumpState)
 
 func stateProcess(delta):
-	# check if down pressed
 	if !player.is_on_floor():
-		nextState = jumpState
+		TransitionStates.emit(self, jumpState)
 	elif !Input.is_action_pressed("down") && player.isSpaceAboveFree():
-		nextState = groundState
+		TransitionStates.emit(self, groundState)
 	elif !crouchAnimationInProgress:
 		if player.direction && canMove:
 			player.velocity.x = player.direction * CROUCHSPEED

@@ -9,6 +9,7 @@ class_name Player
 @onready var playerStateMachine: PlayerStateMachine = $PlayerStateMachine
 @onready var groundState: GroundState = $PlayerStateMachine/GroundState
 @onready var jumpState: JumpState = $PlayerStateMachine/JumpState
+@onready var damagedState: DamagedState = $PlayerStateMachine/DamagedState
 @onready var collisionShape: CollisionShape2D = $CollisionShape2D
 @onready var crouchRayCast1: RayCast2D = $CrouchRayCast1
 @onready var crouchRayCast2: RayCast2D = $CrouchRayCast2
@@ -20,7 +21,6 @@ var crouching_hitbox = preload("res://hitboxes/player_crouching_hitbox.tres")
 
 const SPEED: float = 130.0
 const JUMP_VELOCITY: float = -400.0
-const DAMAGE_VELOCITY: float = -200.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -56,21 +56,12 @@ func _physics_process(delta):
 		playerAnimatedSprite.flip_h = false
 
 	move_and_slide()
-
-# TODO: look into moving this logic, checking if this func is necessary
-# TODO: implement variable jump heights based on how long jump button is pressed
-func jump() -> void:
-	velocity.y = JUMP_VELOCITY
-	playerStateMachine.currentState.nextState = jumpState
-	playerAnimationPlayer.play("Jump")
 	
 func processDamage() -> void:
-	velocity.y = DAMAGE_VELOCITY
-	playerStateMachine.currentState.nextState = jumpState
-	playerAnimationPlayer.play("Fall")
 	# start invincibility frames timer
 	iFramesTimer.start()
-	# change this to one variable to account for all hazards?
+	# transition to damaged state
+	playerStateMachine.currentState.TransitionStates.emit(playerStateMachine.currentState, damagedState)
 	hazardDetectorCollisionShape.set_deferred("disabled", true) 
 	
 func isSpaceAboveFree() -> bool:
