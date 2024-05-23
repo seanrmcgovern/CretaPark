@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://cb5wgy3cnxogo"]
+[gd_scene load_steps=50 format=3 uid="uid://cb5wgy3cnxogo"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_2c4gy"]
 [ext_resource type="Texture2D" uid="uid://c3ikj11u8i7cx" path="res://creataSprites/walk/brian-walk-0.png" id="1_ph438"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" path="res://DebugVelocityX.gd" id="25_pdjrl"]
 [ext_resource type="Script" path="res://CrouchState.gd" id="29_ha6br"]
 [ext_resource type="Script" path="res://DamagedState.gd" id="30_18w5g"]
+[ext_resource type="Script" path="res://FallState.gd" id="31_7wi4f"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w8xg5"]
 animations = [{
@@ -568,15 +569,17 @@ player = NodePath("..")
 animationPlayer = NodePath("../AnimationPlayer")
 currentState = NodePath("GroundState")
 
-[node name="GroundState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("jumpState", "crouchState")]
+[node name="GroundState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("jumpState", "fallState", "crouchState")]
 script = ExtResource("18_v2hn7")
 jumpState = NodePath("../JumpState")
+fallState = NodePath("../FallState")
 crouchState = NodePath("../CrouchState")
 
-[node name="JumpState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("landingState", "crouchState")]
+[node name="JumpState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("landingState", "crouchState", "fallState")]
 script = ExtResource("19_66nrs")
 landingState = NodePath("../LandingState")
 crouchState = NodePath("../CrouchState")
+fallState = NodePath("../FallState")
 
 [node name="LandingState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("groundState", "crouchState", "jumpState")]
 script = ExtResource("21_5yp2n")
@@ -599,7 +602,13 @@ script = ExtResource("30_18w5g")
 landingState = NodePath("../LandingState")
 crouchState = NodePath("../CrouchState")
 
+[node name="FallState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("landingState", "crouchState")]
+script = ExtResource("31_7wi4f")
+landingState = NodePath("../LandingState")
+crouchState = NodePath("../CrouchState")
+
 [node name="DebugStateMachineLabel" type="Label" parent="." node_paths=PackedStringArray("stateMachine")]
+visible = false
 offset_left = -47.0
 offset_top = -38.0
 offset_right = 85.0

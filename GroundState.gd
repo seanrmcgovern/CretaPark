@@ -11,6 +11,7 @@ const SPEED: float = 130.0
 const JUMP_VELOCITY: float = -400.0
 
 @export var jumpState: JumpState
+@export var fallState: FallState
 @export var crouchState: CrouchState
 
 var standUpAnimationInProgress: bool = false
@@ -30,7 +31,7 @@ func stateInput(event: InputEvent):
 
 func stateProcess(delta):
 	if !player.is_on_floor():
-		TransitionStates.emit(self, jumpState)
+		TransitionStates.emit(self, fallState)
 	elif Input.is_action_pressed(Common.Action.DOWN):
 		TransitionStates.emit(self, crouchState)
 	elif !standUpAnimationInProgress:

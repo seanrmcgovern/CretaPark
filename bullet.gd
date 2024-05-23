@@ -1,8 +1,7 @@
 extends CharacterBody2D
 
 # TODO:
-# Change from CharacterBody2D
-# Add different guns/bullets
+# Add different guns/bullets, which varying fire rates and effects
 # ammo crates, cool metroid style ammo gauge
 # add collectibles, dino eggs, amber, etc.
 # add animation for shaking head or looking at gun when trying to shoot without ammo
