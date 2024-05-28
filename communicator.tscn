@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjinwwsmwdte8"]
+
+[ext_resource type="Texture2D" uid="uid://ctffhhh2b5ktn" path="res://creataSprites/misc/computer.png" id="1_144ya"]
+
+[node name="Communicator" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_144ya")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = -60.0
+offset_top = -53.0
+offset_right = 60.0
+offset_bottom = 36.0
+color = Color(0.321569, 0.321569, 0.321569, 1)

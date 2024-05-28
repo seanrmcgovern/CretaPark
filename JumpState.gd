@@ -17,8 +17,9 @@ func enter():
 	animationPlayer.play(Common.SpriteAnimation.JUMP)
 
 func stateProcess(delta):
+	if (player.is_on_floor()):
+		TransitionStates.emit(self, crouchState if Input.is_action_pressed(Common.Action.DOWN) else landingState)
 	if player.direction && canMove:
 		player.velocity.x = player.direction * SPEED
-		
 	if player.velocity.y > 0 && player.velocity.x != 0:
 		TransitionStates.emit(self, fallState)

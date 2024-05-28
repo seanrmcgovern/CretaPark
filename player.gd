@@ -3,6 +3,11 @@ class_name Player
 
 # TODO:
 # lower Left/Right Markers when crouching
+# ART TODO:
+# Draw World 1 Background
+# Draw Computer Screen
+# Draw Compy Jump
+# Draw more collectibles: Amber, Fossils
 
 @onready var playerAnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var playerAnimationPlayer: AnimationPlayer = $AnimationPlayer

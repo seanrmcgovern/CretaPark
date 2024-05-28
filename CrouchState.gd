@@ -1,5 +1,4 @@
 extends State
-
 class_name CrouchState
 # CrouchState shares some logic with GroundState
 # maybe we could make a parent class they both inherit from

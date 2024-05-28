@@ -1,11 +1,10 @@
 extends State
-
+class_name GroundState
 #TODO: 
 # 1) May need to break this out into Idle, Running, etc. states
 # 2) Look into using signals instead of using a nextState variable to indicate state transitions 
 	# it most likely involves using a custom code defined signal
 	# look up GDQuest's online tutorial on state machines for an example using an onTransitioned function
-class_name GroundState
 
 const SPEED: float = 130.0
 const JUMP_VELOCITY: float = -400.0
