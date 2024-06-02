@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var brianAnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var speechBubbleSprite: Sprite2D = $SpeechBubbleSprite
+@onready var speechSound = preload("res://Sounds/speech.wav")
 @onready var interactionArea: Area2D = $InteractionArea
 
 var brianLevel1Lines: Array[String] = [
@@ -35,6 +36,6 @@ func _unhandled_input(event):
 	if event.is_action_pressed("advanceDialog"):
 		if (speechBubbleSprite.visible):
 			speechBubbleSprite.visible = false
-			DialogManager.startDialog(global_position, brianLevel1Lines)
+			DialogManager.startDialog(global_position, brianLevel1Lines, speechSound)
 			#brianAnimatedSprite.flip_h = true if interactionArea.get_overlapping_bodies()[0].global_position.x < global_position.x else false
 			

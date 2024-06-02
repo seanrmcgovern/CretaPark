@@ -8,17 +8,18 @@ var currentLineIndex: int = 0
 var textBox
 var textBoxPosition: Vector2
 
+var sfx: AudioStream
+
 var isDialogActive: bool = false
 var canAdvanceLine: bool = false
 
-func startDialog(position: Vector2, lines: Array[String]):
+func startDialog(position: Vector2, lines: Array[String], speechSfx: AudioStream):
 	# a dialog is already active, then we don't want to start another one
 	if isDialogActive:
 		return
-	print_debug("starting dialog")
 	dialogLines = lines
-	print_debug("position: ", position)
 	textBoxPosition = position
+	sfx = speechSfx
 	showTextBox()
 	isDialogActive = true
 	
@@ -27,7 +28,7 @@ func showTextBox():
 	textBox.FinishedDisplaying.connect(onTextBoxFinishedDisplaying)
 	get_tree().root.add_child(textBox)
 	textBox.global_position = textBoxPosition
-	textBox.displayText(dialogLines[currentLineIndex])
+	textBox.displayText(dialogLines[currentLineIndex], sfx)
 	canAdvanceLine = false
 	
 func onTextBoxFinishedDisplaying():
