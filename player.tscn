@@ -608,6 +608,7 @@ landingState = NodePath("../LandingState")
 crouchState = NodePath("../CrouchState")
 
 [node name="DebugStateMachineLabel" type="Label" parent="." node_paths=PackedStringArray("stateMachine")]
+visible = false
 offset_left = -47.0
 offset_top = -38.0
 offset_right = 85.0

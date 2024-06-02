@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://oqfa1k1uuxyn"]
+
+[ext_resource type="Script" path="res://brianNpc.gd" id="1_8vmvb"]
+[ext_resource type="Texture2D" uid="uid://q834mvoi8fcj" path="res://creataSprites/brian/idle/brian-idle-0.png" id="1_os30s"]
+[ext_resource type="Texture2D" uid="uid://cqhxck7smsi1h" path="res://creataSprites/misc/speechBubble.png" id="2_rlcwj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yh2jv"]
+size = Vector2(27, 31)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3k50i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_os30s")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qh3kl"]
+radius = 54.0093
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 64
+script = ExtResource("1_8vmvb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, -15.5)
+shape = SubResource("RectangleShape2D_yh2jv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -16)
+sprite_frames = SubResource("SpriteFrames_3k50i")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_qh3kl")
+
+[node name="SpeechBubbleSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(17.5, -35.5)
+scale = Vector2(0.4375, 0.4375)
+texture = ExtResource("2_rlcwj")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]

@@ -1,19 +1,18 @@
 extends MarginContainer
-class_name TextBox
 
 signal FinishedDisplaying
 
 @onready var letterDisplayTimer: Timer = $LetterDisplayTimer
 @onready var label: Label = $MarginContainer/Label
 
-# could try making this an export variable 
-const MAX_WIDTH: int = 256
+const MAX_WIDTH: int = 150
+const MAX_HEIGHT: int = 20
 
 var text: String = ""
 var letterIndex = 0
 
-var letterTime: float = 0.03
-var spaceTime: float = 0.06
+var letterTime: float = 0.05
+var spaceTime: float = 0.08
 var punctuationTime: float = 0.2
 
 func displayText(textToDisplay: String):
@@ -22,8 +21,7 @@ func displayText(textToDisplay: String):
 	# await text box resized signal, 
 	# as it is being adjusted according to the size of our label
 	await resized
-	# may want to hard code this size for the communicator screen
-	custom_minimum_size = min(size.x, MAX_WIDTH)
+	custom_minimum_size.x = min(size.x, MAX_WIDTH)
 	# if current x size is greater than MAXWIDTH
 	# then we want the label's text to go into a new line 
 	if size.x > MAX_WIDTH:
@@ -32,10 +30,12 @@ func displayText(textToDisplay: String):
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD
 		await resized # wait for x to resize
 		await resized # wait for y to resize
-		custom_minimum_size.y = size.y
+		print_debug("sizeY: ", size.y)
+		#custom_minimum_size.y = size.y
+		custom_minimum_size.y = min(size.y, MAX_HEIGHT)
 
-	global_position.x -= size.x / 2
-	global_position.y -= size.y + 24
+	global_position.x -= (size.x / 2) * scale.x
+	global_position.y -= (size.y + 24) * scale.y
 	label.text = ""
 	displayLetter()
 	
@@ -53,8 +53,6 @@ func displayLetter():
 			letterDisplayTimer.start(spaceTime)
 		_:
 			letterDisplayTimer.start(letterTime)
-
-
 
 func _on_letter_display_timer_timeout():
 	displayLetter()

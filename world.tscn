@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cc3nlonre66tl"]
+[gd_scene load_steps=22 format=3 uid="uid://cc3nlonre66tl"]
 
 [ext_resource type="Texture2D" uid="uid://cd3o72y5cirq2" path="res://sunny-land/assets/environment/tileset.png" id="1_tkr1h"]
 [ext_resource type="Script" path="res://background.gd" id="1_vunxt"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://cv33ojkvm6r5n" path="res://Fonts/Anta-Regular.ttf" id="6_u3xhr"]
 [ext_resource type="PackedScene" uid="uid://c14l2gwl8r0wc" path="res://keyCard.tscn" id="9_xamxm"]
 [ext_resource type="PackedScene" uid="uid://dh08frgt76knw" path="res://spikes.tscn" id="10_mid62"]
+[ext_resource type="PackedScene" uid="uid://oqfa1k1uuxyn" path="res://brianNpc.tscn" id="12_li0we"]
 [ext_resource type="PackedScene" uid="uid://b4fiwuqsy4pqd" path="res://compy.tscn" id="12_x8ej2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0w3o"]
@@ -595,12 +596,12 @@ wait_time = 5.0
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("6_ibvdt")]
-position = Vector2(212, 288)
+position = Vector2(65, 288)
 
 [node name="StaticBodyCrouchingTest" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodyCrouchingTest"]
-position = Vector2(97, 242)
+position = Vector2(632, 250)
 shape = SubResource("RectangleShape2D_0f5iy")
 
 [node name="KeyCard" parent="." instance=ExtResource("9_xamxm")]
@@ -641,5 +642,8 @@ metadata/_edit_lock_ = true
 
 [node name="Compy5" parent="." instance=ExtResource("12_x8ej2")]
 position = Vector2(1773, 304)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("12_li0we")]
+position = Vector2(179, 304)
 
 [connection signal="timeout" from="Timer" to="Collectables" method="_on_timer_timeout"]

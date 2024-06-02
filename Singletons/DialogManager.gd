@@ -15,7 +15,9 @@ func startDialog(position: Vector2, lines: Array[String]):
 	# a dialog is already active, then we don't want to start another one
 	if isDialogActive:
 		return
+	print_debug("starting dialog")
 	dialogLines = lines
+	print_debug("position: ", position)
 	textBoxPosition = position
 	showTextBox()
 	isDialogActive = true
