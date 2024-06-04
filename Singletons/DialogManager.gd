@@ -19,6 +19,7 @@ func startDialog(position: Vector2, lines: Array[String], speechSfx: AudioStream
 		return
 	dialogLines = lines
 	textBoxPosition = position
+	textBoxPosition.y -= 15
 	sfx = speechSfx
 	showTextBox()
 	isDialogActive = true

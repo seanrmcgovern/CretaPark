@@ -1,8 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://6yvdxdyaj1ep"]
+[gd_scene load_steps=9 format=3 uid="uid://6yvdxdyaj1ep"]
 
 [ext_resource type="Script" path="res://textBox.gd" id="1_gefip"]
-[ext_resource type="Texture2D" uid="uid://dg8w8tf30n3xi" path="res://creataSprites/misc/screen.png" id="1_u4qa6"]
+[ext_resource type="Texture2D" uid="uid://nab6bxwm6a2r" path="res://creataSprites/misc/dialogBox.png" id="2_c2hs0"]
+[ext_resource type="Texture2D" uid="uid://dq73640irtf0k" path="res://creataSprites/misc/dialogBoxTail.png" id="3_0ird0"]
 [ext_resource type="FontFile" uid="uid://cj8uawe4slm5x" path="res://Fonts/Bitty.ttf" id="3_7tqx3"]
+[ext_resource type="Texture2D" uid="uid://dy1hs5v5q14fn" path="res://creataSprites/misc/nextIndicator/next-indicator-0.png" id="4_m2l2i"]
+[ext_resource type="Texture2D" uid="uid://pn5cyx234je7" path="res://creataSprites/misc/nextIndicator/next-indicator-1.png" id="5_20bbh"]
+[ext_resource type="Texture2D" uid="uid://c3jpcrc17chyq" path="res://creataSprites/misc/nextIndicator/next-indicator-2.png" id="6_hqrw0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kq4jr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_m2l2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_20bbh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_hqrw0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_20bbh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="TextBox" type="MarginContainer"]
 offset_right = 17.0
@@ -11,8 +35,47 @@ script = ExtResource("1_gefip")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 2
-texture = ExtResource("1_u4qa6")
-region_rect = Rect2(48, 48, 64, 64)
+texture = ExtResource("2_c2hs0")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Control" type="Control" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="NinePatchRect/Control"]
+position = Vector2(20, 62)
+texture = ExtResource("3_0ird0")
+
+[node name="Control2" type="Control" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="NextIndicator" type="AnimatedSprite2D" parent="NinePatchRect/Control2"]
+visible = false
+position = Vector2(-5, -5.5)
+scale = Vector2(0.3125, 0.28125)
+sprite_frames = SubResource("SpriteFrames_kq4jr")
+autoplay = "default"
+frame_progress = 0.12643
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -23,7 +86,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="Label" type="Label" parent="MarginContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.886275, 0.92549, 1, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_7tqx3")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1

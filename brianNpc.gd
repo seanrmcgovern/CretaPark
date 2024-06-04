@@ -37,5 +37,5 @@ func _unhandled_input(event):
 		if (speechBubbleSprite.visible):
 			speechBubbleSprite.visible = false
 			DialogManager.startDialog(global_position, brianLevel1Lines, speechSound)
-			#brianAnimatedSprite.flip_h = true if interactionArea.get_overlapping_bodies()[0].global_position.x < global_position.x else false
+			brianAnimatedSprite.flip_h = true if interactionArea.get_overlapping_bodies()[0].global_position.x < global_position.x else false
 			

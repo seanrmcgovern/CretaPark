@@ -601,7 +601,7 @@ position = Vector2(65, 288)
 [node name="StaticBodyCrouchingTest" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodyCrouchingTest"]
-position = Vector2(632, 250)
+position = Vector2(1996, 252)
 shape = SubResource("RectangleShape2D_0f5iy")
 
 [node name="KeyCard" parent="." instance=ExtResource("9_xamxm")]

@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 # TODO:
+# tip of compy not detecting damage
+# bullet collides with explosion animation
 # add state machine, chase state
 # could have dinos drop randomized amount of bones or other materials
 # could drop randomized types of bones, meant to inspire the player to collect
@@ -64,7 +66,7 @@ func _on_projectile_detection_body_entered(body):
 
 # should make an enemy parent class with this function
 # gold could be a parameter
-func death():
+func death() -> void:
 	Game.gold += 5
 	Utils.saveGame()
 	chase = false

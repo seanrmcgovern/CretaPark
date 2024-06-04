@@ -5,6 +5,7 @@ signal FinishedDisplaying
 @onready var letterDisplayTimer: Timer = $LetterDisplayTimer
 @onready var label: Label = $MarginContainer/Label
 @onready var audioPlayer: AudioStreamPlayer = $AudioStreamPlayer
+@onready var nextIndicator: AnimatedSprite2D = $NinePatchRect/Control2/NextIndicator
 
 const MAX_WIDTH: int = 150
 const MAX_HEIGHT: int = 10
@@ -15,6 +16,10 @@ var letterIndex = 0
 var letterTime: float = 0.05
 var spaceTime: float = 0.08
 var punctuationTime: float = 0.2
+
+func _ready():
+	# start scale at (0, 0) for popup animation
+	scale = Vector2.ZERO
 
 func displayText(textToDisplay: String, speechSfx: AudioStream):
 	text = textToDisplay
@@ -37,9 +42,17 @@ func displayText(textToDisplay: String, speechSfx: AudioStream):
 		#custom_minimum_size.y = size.y
 		custom_minimum_size.y = min(size.y, MAX_HEIGHT)
 
-	global_position.x -= (size.x / 2) * scale.x
-	global_position.y -= (size.y + 24) * scale.y
+	global_position.x -= (size.x / 2)
+	global_position.y -= (size.y + 24)
 	label.text = ""
+	
+	# setup popup animation
+	pivot_offset = Vector2(size.x/2, size.y)
+	var tween = get_tree().create_tween()
+	tween.tween_property(
+		self, "scale", Vector2(1, 1), 0.2
+	).set_trans(Tween.TRANS_BACK)
+	
 	displayLetter()
 	
 func displayLetter():
@@ -47,6 +60,7 @@ func displayLetter():
 	letterIndex += 1
 	if letterIndex >= text.length():
 		FinishedDisplaying.emit()
+		nextIndicator.visible = true
 		return
 	
 	match text[letterIndex]:
