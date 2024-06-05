@@ -39,31 +39,32 @@ var isCrouched: bool = false
 var isTouchingHazard: bool = false
 
 func _physics_process(delta):
-	# iframes opacity effect
-	if !iFramesTimer.is_stopped():
-		modulate.a = 0.3 if Engine.get_frames_drawn() % 4 == 0 else 1.0
-	if hazardDetectorCollisionShape.disabled && iFramesTimer.is_stopped():
-		hazardDetectorCollisionShape.set_deferred("disabled", false)
-		modulate.a = 1.0
-	
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
+	if (!playerStateMachine.currentState is PausedState):
+		# iframes opacity effect
+		if !iFramesTimer.is_stopped():
+			modulate.a = 0.3 if Engine.get_frames_drawn() % 4 == 0 else 1.0
+		if hazardDetectorCollisionShape.disabled && iFramesTimer.is_stopped():
+			hazardDetectorCollisionShape.set_deferred("disabled", false)
+			modulate.a = 1.0
 
-	# action logic
-	if Input.is_action_pressed(Common.Action.SHOOT):
-		shoot()
-	else:
-		isShooting = false
+		# Add the gravity.
+		if not is_on_floor():
+			velocity.y += gravity * delta
 
-	# Get the input direction and handle the movement/deceleration.
-	direction = Input.get_axis("left", "right")
-	if direction == -1:
-		playerAnimatedSprite.flip_h = true
-	elif direction == 1:
-		playerAnimatedSprite.flip_h = false
+		# action logic
+		if Input.is_action_pressed(Common.Action.SHOOT):
+			shoot()
+		else:
+			isShooting = false
 
-	move_and_slide()
+		# Get the input direction and handle the movement/deceleration.
+		direction = Input.get_axis("left", "right")
+		if direction == -1:
+			playerAnimatedSprite.flip_h = true
+		elif direction == 1:
+			playerAnimatedSprite.flip_h = false
+
+		move_and_slide()
 	
 func processDamage() -> void:
 	# start invincibility frames timer
@@ -93,9 +94,10 @@ func shoot():
 func _on_hazard_detector_area_entered(area):
 	# damage could differ between various hazards
 	print_debug("hazard area entered: ", area.name)
-	if area.name == Common.Hazard.HAZARDAREA:
-		Game.playerHP -= 2
-		processDamage()
+	if (!playerStateMachine.currentState is PausedState):
+		if area.name == Common.Hazard.HAZARDAREA:
+			Game.playerHP -= 2
+			processDamage()
 
 	Utils.saveGame()
 

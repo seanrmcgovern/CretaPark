@@ -28,7 +28,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	
 	# handle chasing player
-	if chase:
+	if chase && !Game.playerStateMachine.currentState is PausedState:
 		var direction = (player.position - self.position).normalized()
 		if direction.x > 0:
 			compyAnimatedSprite.flip_h = true

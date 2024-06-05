@@ -42,6 +42,6 @@ func _unhandled_input(event):
 		if currentLineIndex >= dialogLines.size():
 			isDialogActive = false
 			currentLineIndex = 0
+			Game.playerStateMachine.exitPausedState()
 			return
-			
 		showTextBox()

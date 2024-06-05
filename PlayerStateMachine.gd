@@ -1,6 +1,8 @@
 extends Node
 class_name PlayerStateMachine
 
+@onready var pausedState: PausedState = $PausedState
+
 @export var player: Player
 @export var animationPlayer: AnimationPlayer
 @export var currentState: State
@@ -8,6 +10,7 @@ var states: Array[State]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Game.playerStateMachine = self
 	for child in get_children():
 		if child is State:
 			states.append(child)
@@ -40,3 +43,14 @@ func _input(event: InputEvent):
 
 func canPlayerMove():
 	return currentState.canMove
+
+func isValidPlayerStateForDialog() -> bool:
+	return currentState is GroundState || currentState is PausedState
+
+#Game.playerStateMachine.transitionStates(pausedState, Game.playerStateMachine.currentState.previousState)
+func enterPausedState() -> void:
+	transitionStates(currentState, pausedState)
+
+func exitPausedState() -> void:
+	transitionStates(pausedState, currentState.previousState)
+

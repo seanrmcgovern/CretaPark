@@ -613,10 +613,6 @@ position = Vector2(822, 327)
 [node name="KeyCard3" parent="." instance=ExtResource("9_xamxm")]
 position = Vector2(1274, 295)
 
-[node name="Compy" parent="." instance=ExtResource("12_x8ej2")]
-position = Vector2(420, 273)
-metadata/_edit_lock_ = true
-
 [node name="HazardGroup1" type="Node" parent="."]
 
 [node name="Spikes" parent="HazardGroup1" instance=ExtResource("10_mid62")]
@@ -627,6 +623,10 @@ position = Vector2(1613, 304)
 
 [node name="Spikes3" parent="HazardGroup1" instance=ExtResource("10_mid62")]
 position = Vector2(1581, 304)
+
+[node name="Compy" parent="." instance=ExtResource("12_x8ej2")]
+position = Vector2(420, 273)
+metadata/_edit_lock_ = true
 
 [node name="Compy2" parent="." instance=ExtResource("12_x8ej2")]
 position = Vector2(944, 304)
@@ -643,7 +643,7 @@ metadata/_edit_lock_ = true
 [node name="Compy5" parent="." instance=ExtResource("12_x8ej2")]
 position = Vector2(1773, 304)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("12_li0we")]
+[node name="BrianNpc" parent="." instance=ExtResource("12_li0we")]
 position = Vector2(179, 304)
 
 [connection signal="timeout" from="Timer" to="Collectables" method="_on_timer_timeout"]

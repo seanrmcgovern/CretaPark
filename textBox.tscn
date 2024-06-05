@@ -75,7 +75,7 @@ position = Vector2(-5, -5.5)
 scale = Vector2(0.3125, 0.28125)
 sprite_frames = SubResource("SpriteFrames_kq4jr")
 autoplay = "default"
-frame_progress = 0.12643
+frame_progress = 0.419536
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

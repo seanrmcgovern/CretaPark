@@ -34,7 +34,8 @@ func _on_interaction_area_body_exited(body):
 
 func _unhandled_input(event):
 	if event.is_action_pressed("advanceDialog"):
-		if (speechBubbleSprite.visible):
+		if (speechBubbleSprite.visible && Game.playerStateMachine.isValidPlayerStateForDialog()):
+			Game.playerStateMachine.enterPausedState()
 			speechBubbleSprite.visible = false
 			DialogManager.startDialog(global_position, brianLevel1Lines, speechSound)
 			brianAnimatedSprite.flip_h = true if interactionArea.get_overlapping_bodies()[0].global_position.x < global_position.x else false
