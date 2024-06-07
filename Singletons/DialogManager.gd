@@ -1,7 +1,5 @@
 extends Node
 
-@onready var textBoxScene = preload("res://textBox.tscn")
-
 var dialogLines: Array[String] = []
 var currentLineIndex: int = 0
 
@@ -12,6 +10,8 @@ var sfx: AudioStream
 
 var isDialogActive: bool = false
 var canAdvanceLine: bool = false
+
+@onready var textBoxScene = preload("res://textBox.tscn")
 
 func startDialog(position: Vector2, lines: Array[String], speechSfx: AudioStream):
 	# a dialog is already active, then we don't want to start another one

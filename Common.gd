@@ -1,5 +1,6 @@
 class_name Common
 
+# effectively using dictionaries as enums to easily match string values
 const Action: Dictionary = {
 	"DOWN": "down",
 	"JUMP": "jump",

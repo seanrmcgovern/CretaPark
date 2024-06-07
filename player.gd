@@ -9,6 +9,18 @@ class_name Player
 # Draw Compy Jump
 # Draw more collectibles: Amber, Fossils
 
+const SPEED: float = 130.0
+const JUMP_VELOCITY: float = -400.0
+
+var standing_hitbox = preload("res://hitboxes/player_standing_hitbox.tres")
+var crouching_hitbox = preload("res://hitboxes/player_crouching_hitbox.tres")
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var direction: float = 0
+var isShooting: bool = false
+var isCrouched: bool = false
+var isTouchingHazard: bool = false
+
 @onready var playerAnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var playerAnimationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var playerStateMachine: PlayerStateMachine = $PlayerStateMachine
@@ -23,20 +35,6 @@ class_name Player
 @onready var hazardDetectorCollisionShape: CollisionShape2D = $HazardDetector/HazardDetectorCollisionShape2D
 @onready var leftMarker: Marker2D = $LeftMarker
 @onready var rightMarker: Marker2D = $RightMarker
-
-var standing_hitbox = preload("res://hitboxes/player_standing_hitbox.tres")
-var crouching_hitbox = preload("res://hitboxes/player_crouching_hitbox.tres")
-
-const SPEED: float = 130.0
-const JUMP_VELOCITY: float = -400.0
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
-var direction: float = 0
-var isShooting: bool = false
-var isCrouched: bool = false
-var isTouchingHazard: bool = false
 
 func _physics_process(delta):
 	if (!playerStateMachine.currentState is PausedState):

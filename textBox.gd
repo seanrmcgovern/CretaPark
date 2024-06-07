@@ -2,20 +2,19 @@ extends MarginContainer
 
 signal FinishedDisplaying
 
-@onready var letterDisplayTimer: Timer = $LetterDisplayTimer
-@onready var label: Label = $MarginContainer/Label
-@onready var audioPlayer: AudioStreamPlayer = $AudioStreamPlayer
-@onready var nextIndicator: AnimatedSprite2D = $NinePatchRect/Control2/NextIndicator
-
 const MAX_WIDTH: int = 150
 const MAX_HEIGHT: int = 10
 
 var text: String = ""
 var letterIndex = 0
-
 var letterTime: float = 0.05
 var spaceTime: float = 0.08
 var punctuationTime: float = 0.2
+
+@onready var letterDisplayTimer: Timer = $LetterDisplayTimer
+@onready var label: Label = $MarginContainer/Label
+@onready var audioPlayer: AudioStreamPlayer = $AudioStreamPlayer
+@onready var nextIndicator: AnimatedSprite2D = $NinePatchRect/Control2/NextIndicator
 
 func _ready():
 	# start scale at (0, 0) for popup animation

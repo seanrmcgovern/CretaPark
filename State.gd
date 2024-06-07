@@ -8,7 +8,6 @@ signal TransitionStates
 
 var player: Player
 var animationPlayer: AnimationPlayer
-
 var previousState: State
 
 func stateProcess(delta):

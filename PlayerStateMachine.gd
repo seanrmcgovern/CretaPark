@@ -1,12 +1,13 @@
 extends Node
 class_name PlayerStateMachine
 
-@onready var pausedState: PausedState = $PausedState
-
 @export var player: Player
 @export var animationPlayer: AnimationPlayer
 @export var currentState: State
+
 var states: Array[State]
+
+@onready var pausedState: PausedState = $PausedState
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -18,6 +18,7 @@ extends CharacterBody2D
 
 #var bulletVelocity = Vector2(1, 0)
 const SPEED = 300.0
+
 var bulletIsExploded = false
 
 @onready var bulletDespawnTimer: Timer = $BulletDespawnTimer

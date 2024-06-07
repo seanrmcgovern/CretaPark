@@ -1,10 +1,5 @@
 extends CharacterBody2D
 
-@onready var brianAnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var speechBubbleSprite: Sprite2D = $SpeechBubbleSprite
-@onready var speechSound = preload("res://Sounds/speech.wav")
-@onready var interactionArea: Area2D = $InteractionArea
-
 var brianLevel1Lines: Array[String] = [
 	"Welcome, to Cretacious Park!",
 	"That's Creta Park for short.",
@@ -17,6 +12,11 @@ var brianLevel1Lines: Array[String] = [
 ]
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+@onready var brianAnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var speechBubbleSprite: Sprite2D = $SpeechBubbleSprite
+@onready var speechSound = preload("res://Sounds/speech.wav")
+@onready var interactionArea: Area2D = $InteractionArea
 
 func _physics_process(delta):
 	if not is_on_floor():
