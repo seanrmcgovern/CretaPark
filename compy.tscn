@@ -185,6 +185,10 @@ libraries = {
 "": SubResource("AnimationLibrary_nemwc")
 }
 
+[node name="DespawnAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="HitAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]
 [connection signal="body_entered" from="ProjectileDetection" to="." method="_on_projectile_detection_body_entered"]

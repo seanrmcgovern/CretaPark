@@ -1,11 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://cc3nlonre66tl"]
+[gd_scene load_steps=20 format=3 uid="uid://cc3nlonre66tl"]
 
 [ext_resource type="Texture2D" uid="uid://cd3o72y5cirq2" path="res://sunny-land/assets/environment/tileset.png" id="1_tkr1h"]
 [ext_resource type="Script" path="res://background.gd" id="1_vunxt"]
 [ext_resource type="Texture2D" uid="uid://bd3ufiyoo011b" path="res://creataSprites/environment/main/floor1.png" id="2_f0muf"]
 [ext_resource type="Texture2D" uid="uid://56ffcdf4ei4c" path="res://creataSprites/environment/main/floor0.png" id="2_re3fj"]
 [ext_resource type="Texture2D" uid="uid://m51l151fj2qn" path="res://Sunny-land-files/Graphical Assets/environment/Background/back.png" id="2_uo6yo"]
-[ext_resource type="PackedScene" uid="uid://doowqhfhylqpp" path="res://Collectibles/Cherry.tscn" id="6_4dqvp"]
 [ext_resource type="PackedScene" uid="uid://cb5wgy3cnxogo" path="res://player.tscn" id="6_ibvdt"]
 [ext_resource type="FontFile" uid="uid://cv33ojkvm6r5n" path="res://Fonts/Anta-Regular.ttf" id="6_u3xhr"]
 [ext_resource type="PackedScene" uid="uid://c14l2gwl8r0wc" path="res://keyCard.tscn" id="9_xamxm"]
@@ -478,20 +477,6 @@ func _process(_delta):
 	text = \"Ammo: \" + str(Game.ammo) + \"/100\"
 "
 
-[sub_resource type="GDScript" id="GDScript_i2gmx"]
-script/source = "extends Node2D
-
-var cherry = preload(\"res://Collectibles/Cherry.tscn\")
-
-func _on_timer_timeout():
-	pass
-	#var cherryTemp = cherry.instantiate()
-	#var rng = RandomNumberGenerator.new()
-	#var randInt = rng.randi_range(10, 400)
-	#cherryTemp.position = Vector2(randInt, 280)
-	#add_child(cherryTemp)
-"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0f5iy"]
 size = Vector2(127, 66.5)
 
@@ -585,12 +570,6 @@ theme_override_font_sizes/font_size = 100
 text = "100
 "
 
-[node name="Collectables" type="Node2D" parent="."]
-script = SubResource("GDScript_i2gmx")
-
-[node name="Cherry" parent="Collectables" instance=ExtResource("6_4dqvp")]
-position = Vector2(980, 260)
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
@@ -645,5 +624,3 @@ position = Vector2(1773, 304)
 
 [node name="BrianNpc" parent="." instance=ExtResource("12_li0we")]
 position = Vector2(179, 304)
-
-[connection signal="timeout" from="Timer" to="Collectables" method="_on_timer_timeout"]

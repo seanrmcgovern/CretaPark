@@ -25,3 +25,9 @@ func loadGame():
 				Game.gold = current_line["gold"]
 				Game.ammo = current_line["ammo"]
 	
+func duplicateAudioStreamPlayerForSingleUse(audioStreamPlayer: AudioStreamPlayer) -> void:
+	var newAudioPlayer: AudioStreamPlayer = audioStreamPlayer.duplicate()
+	get_tree().root.add_child(newAudioPlayer)
+	newAudioPlayer.play()
+	await newAudioPlayer.finished
+	newAudioPlayer.queue_free()

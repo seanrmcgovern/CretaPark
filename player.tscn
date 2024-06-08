@@ -612,18 +612,9 @@ crouchState = NodePath("../CrouchState")
 script = ExtResource("32_qo84k")
 canMove = false
 
-[node name="DebugStateMachineLabel" type="Label" parent="." node_paths=PackedStringArray("stateMachine")]
-offset_left = -47.0
-offset_top = -38.0
-offset_right = 85.0
-offset_bottom = -15.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-text = "State: "
-script = ExtResource("23_msddp")
-stateMachine = NodePath("../PlayerStateMachine")
+[node name="DebugNodeContainer" type="Node" parent="."]
 
-[node name="DebugDirection" type="Label" parent="." node_paths=PackedStringArray("player")]
+[node name="DebugDirection" type="Label" parent="DebugNodeContainer" node_paths=PackedStringArray("player")]
 visible = false
 offset_left = -48.0
 offset_top = -55.0
@@ -633,9 +624,21 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 text = "Direction:"
 script = ExtResource("24_6qiga")
-player = NodePath("..")
+player = NodePath("../..")
 
-[node name="DebugVelocityX" type="Label" parent="." node_paths=PackedStringArray("player")]
+[node name="DebugStateMachineLabel" type="Label" parent="DebugNodeContainer" node_paths=PackedStringArray("stateMachine")]
+visible = false
+offset_left = -47.0
+offset_top = -38.0
+offset_right = 85.0
+offset_bottom = -15.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "State: "
+script = ExtResource("23_msddp")
+stateMachine = NodePath("../../PlayerStateMachine")
+
+[node name="DebugVelocityX" type="Label" parent="DebugNodeContainer" node_paths=PackedStringArray("player")]
 visible = false
 offset_left = -49.0
 offset_top = -72.0
@@ -645,7 +648,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 text = "VelocityX: "
 script = ExtResource("25_pdjrl")
-player = NodePath("..")
+player = NodePath("../..")
 
 [node name="CrouchRayCast1" type="RayCast2D" parent="."]
 position = Vector2(-10, 0)
@@ -665,6 +668,8 @@ shape = SubResource("CapsuleShape2D_w6yqs")
 [node name="InvincibilityFramesTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="HitAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="PlayerStateMachine/GroundState" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="PlayerStateMachine/LandingState" method="_on_animation_player_animation_finished"]

@@ -20,7 +20,12 @@ var chase: bool = false
 @onready var hitFlashAnimPlayer: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var compyAnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hazardAreaCollisionShape: CollisionShape2D = $HazardArea/CollisionShape2D
+@onready var despawnAudioStreamPlayer: AudioStreamPlayer = $DespawnAudioStreamPlayer
+@onready var despawnSound = preload("res://Sounds/despawn.wav")
 @onready var player: Player = get_node("../Player")
+
+func _ready():
+	despawnAudioStreamPlayer.stream = despawnSound
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -54,6 +59,7 @@ func _on_player_detection_body_exited(body):
 # detect damage from player attacks
 func _on_projectile_detection_body_entered(body):
 	if body.name == Common.Body.BULLET && dinoHealth > 0:
+		# prevent bullet from colliding during animation
 		body.get_node("BulletCollision").set_deferred("disabled", true)
 		# deduct health
 		dinoHealth -= 1
@@ -70,6 +76,8 @@ func death() -> void:
 	Game.gold += 5
 	Utils.saveGame()
 	chase = false
+	# play sound effect
+	Utils.duplicateAudioStreamPlayerForSingleUse(despawnAudioStreamPlayer)
 	# disale hazard area collision shape so player does not take damage during animation
 	hazardAreaCollisionShape.set_deferred("disabled", true)
 	compyAnimatedSprite.play(Common.SpriteAnimation.DEATH)

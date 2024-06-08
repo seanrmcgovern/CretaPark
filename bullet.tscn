@@ -79,4 +79,8 @@ animation = &"Explode"
 autoplay = "Idle"
 metadata/_edit_lock_ = true
 
+[node name="HitAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="FireAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="body_entered" from="BulletArea" to="." method="_on_bullet_collision_body_entered"]

@@ -23,9 +23,16 @@ var bulletIsExploded = false
 
 @onready var bulletDespawnTimer: Timer = $BulletDespawnTimer
 @onready var bulletAnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var fireAudioStreamPlayer: AudioStreamPlayer = $FireAudioStreamPlayer
+@onready var fireSound = preload("res://Sounds/fire.wav")
+@onready var hitAudioStreamPlayer: AudioStreamPlayer = $HitAudioStreamPlayer
+@onready var hitSound = preload("res://Sounds/dino-hit.wav")
 
 func _ready():
+	hitAudioStreamPlayer.stream = hitSound
+	fireAudioStreamPlayer.stream = fireSound
 	if Game.ammo > 0:
+		Utils.duplicateAudioStreamPlayerForSingleUse(fireAudioStreamPlayer)
 		Game.ammo -= 1
 
 func _physics_process(delta):
@@ -38,6 +45,8 @@ func _physics_process(delta):
 
 func _on_bullet_collision_body_entered(body):
 	if (body.name != Common.Body.BULLET):
+		# play sound effect
+		Utils.duplicateAudioStreamPlayerForSingleUse(hitAudioStreamPlayer)
 		bulletAnimatedSprite.play(Common.SpriteAnimation.EXPLODE)
 		bulletIsExploded = true
 		await bulletAnimatedSprite.animation_finished

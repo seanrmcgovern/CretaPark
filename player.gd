@@ -35,6 +35,12 @@ var isTouchingHazard: bool = false
 @onready var hazardDetectorCollisionShape: CollisionShape2D = $HazardDetector/HazardDetectorCollisionShape2D
 @onready var leftMarker: Marker2D = $LeftMarker
 @onready var rightMarker: Marker2D = $RightMarker
+@onready var hitAudioStreamPlayer: AudioStreamPlayer = $HitAudioStreamPlayer
+@onready var hitSound = preload("res://Sounds/player-hit.wav")
+
+func _ready():
+	hitAudioStreamPlayer.stream = hitSound
+	hitAudioStreamPlayer.volume_db = 5
 
 func _physics_process(delta):
 	if (!playerStateMachine.currentState is PausedState):
@@ -65,6 +71,8 @@ func _physics_process(delta):
 		move_and_slide()
 	
 func processDamage() -> void:
+	# play sound effect
+	Utils.duplicateAudioStreamPlayerForSingleUse(hitAudioStreamPlayer)
 	# start invincibility frames timer
 	iFramesTimer.start()
 	# transition to damaged state
