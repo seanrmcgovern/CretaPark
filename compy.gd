@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 # TODO:
-# tip of compy not detecting damage
 # bullet collides with explosion animation
 # add state machine, chase state
 # could have dinos drop randomized amount of bones or other materials
