@@ -1,0 +1,164 @@
+[gd_scene load_steps=17 format=3 uid="uid://dwksu1rrg3acg"]
+
+[ext_resource type="Script" path="res://proto.gd" id="1_a4tvv"]
+[ext_resource type="Texture2D" uid="uid://b3s2gmys8uslj" path="res://creataSprites/proto/proto-walk-0.png" id="1_klk8s"]
+[ext_resource type="PackedScene" uid="uid://cpynhkadwf07i" path="res://hazardArea.tscn" id="1_quksy"]
+[ext_resource type="Texture2D" uid="uid://ckv87m5pivky7" path="res://creataSprites/proto/proto-walk-1.png" id="2_w00h5"]
+[ext_resource type="Texture2D" uid="uid://xp31kl7x6fim" path="res://creataSprites/compyDeath/compy-death-0.png" id="3_47bsy"]
+[ext_resource type="Texture2D" uid="uid://d3qcpfwctoif5" path="res://creataSprites/proto/proto-walk-2.png" id="3_q6vty"]
+[ext_resource type="Texture2D" uid="uid://cyaj8lpgpbamh" path="res://creataSprites/compyDeath/compy-death-1.png" id="4_qcid8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hmo87"]
+size = Vector2(55, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6dyx"]
+size = Vector2(36, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0mc3h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_47bsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qcid8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_47bsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qcid8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_47bsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qcid8")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_klk8s")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_klk8s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_w00h5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_klk8s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_q6vty")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dutxe"]
+size = Vector2(62, 41)
+
+[sub_resource type="Animation" id="Animation_6pxa6"]
+resource_name = "HitFlash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_dmvac"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nemwc"]
+_data = {
+"HitFlash": SubResource("Animation_6pxa6"),
+"RESET": SubResource("Animation_dmvac")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lso0b"]
+size = Vector2(17, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4176"]
+size = Vector2(19, 34)
+
+[node name="Proto" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_a4tvv")
+
+[node name="HazardArea" parent="." instance=ExtResource("1_quksy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardArea"]
+position = Vector2(-2.5, 4)
+shape = SubResource("RectangleShape2D_hmo87")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 11.5)
+shape = SubResource("RectangleShape2D_f6dyx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0mc3h")
+animation = &"Death"
+autoplay = "Idle"
+
+[node name="ProjectileDetection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileDetection"]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_dutxe")
+
+[node name="DespawnAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nemwc")
+}
+
+[node name="OverworldDetection1" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OverworldDetection1"]
+position = Vector2(-31.5, -7)
+shape = SubResource("RectangleShape2D_lso0b")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="OverworldDetection2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OverworldDetection2"]
+position = Vector2(30.5, -7)
+shape = SubResource("RectangleShape2D_l4176")
+
+[connection signal="body_entered" from="ProjectileDetection" to="." method="_on_projectile_detection_body_entered"]
+[connection signal="body_entered" from="OverworldDetection1" to="." method="_on_overworld_detection_1_body_entered"]
+[connection signal="body_entered" from="OverworldDetection2" to="." method="_on_overworld_detection_2_body_entered"]

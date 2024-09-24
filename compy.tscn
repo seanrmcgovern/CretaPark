@@ -156,7 +156,7 @@ shape = SubResource("RectangleShape2D_8rj4t")
 material = SubResource("ShaderMaterial_3dxea")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_24s8r")
-animation = &"Idle"
+animation = &"Death"
 autoplay = "Idle"
 
 [node name="PlayerDetection" type="Area2D" parent="."]

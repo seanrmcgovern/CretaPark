@@ -16,8 +16,8 @@ var chase: bool = false
 
 # should be using onready var mynode = $MyNode to cache the references, 
 # which is faster than getting the nodes each frame, it makes a bigger difference than the NodePaths alone
-@onready var hitFlashAnimPlayer: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var compyAnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var hitFlashAnimPlayer: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var hazardAreaCollisionShape: CollisionShape2D = $HazardArea/CollisionShape2D
 @onready var despawnAudioStreamPlayer: AudioStreamPlayer = $DespawnAudioStreamPlayer
 @onready var despawnSound = preload("res://Sounds/despawn.wav")
