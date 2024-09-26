@@ -19,6 +19,7 @@ var chase: bool = false
 @onready var compyAnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitFlashAnimPlayer: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var hazardAreaCollisionShape: CollisionShape2D = $HazardArea/CollisionShape2D
+@onready var compyCollisionShape: CollisionShape2D = $CollisionShape2D
 @onready var despawnAudioStreamPlayer: AudioStreamPlayer = $DespawnAudioStreamPlayer
 @onready var despawnSound = preload("res://Sounds/despawn.wav")
 @onready var player: Player = get_node("../Player")
@@ -79,6 +80,7 @@ func death() -> void:
 	Utils.duplicateAudioStreamPlayerForSingleUse(despawnAudioStreamPlayer)
 	# disale hazard area collision shape so player does not take damage during animation
 	hazardAreaCollisionShape.set_deferred("disabled", true)
+	compyCollisionShape.set_deferred("disabled", true)
 	compyAnimatedSprite.play(Common.SpriteAnimation.DEATH)
 	await compyAnimatedSprite.animation_finished
 	self.queue_free()

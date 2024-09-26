@@ -44,6 +44,7 @@ func _physics_process(delta):
 		self.queue_free()
 
 func _on_bullet_collision_body_entered(body):
+	#print_debug(body.name)
 	if (body.name != Common.Body.BULLET):
 		# play sound effect
 		Utils.duplicateAudioStreamPlayerForSingleUse(hitAudioStreamPlayer)
@@ -51,4 +52,3 @@ func _on_bullet_collision_body_entered(body):
 		bulletIsExploded = true
 		await bulletAnimatedSprite.animation_finished
 		self.queue_free()
-

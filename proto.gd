@@ -21,6 +21,7 @@ var lastPosition: float = 0
 @onready var protoAnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitFlashAnimPlayer: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var hazardAreaCollisionShape: CollisionShape2D = $HazardArea/CollisionShape2D
+@onready var protoCollisionShape: CollisionShape2D = $CollisionShape2D
 @onready var despawnAudioStreamPlayer: AudioStreamPlayer = $DespawnAudioStreamPlayer
 @onready var overworldDetection1: Area2D = $OverworldDetection1
 @onready var overworldDetection2: Area2D = $OverworldDetection2
@@ -70,6 +71,7 @@ func death() -> void:
 	Utils.duplicateAudioStreamPlayerForSingleUse(despawnAudioStreamPlayer)
 	# disale hazard area collision shape so player does not take damage during animation
 	hazardAreaCollisionShape.set_deferred("disabled", true)
+	protoCollisionShape.set_deferred("disabled", true)
 	protoAnimatedSprite.play(Common.SpriteAnimation.DEATH)
 	await protoAnimatedSprite.animation_finished
 	self.queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b4fiwuqsy4pqd"]
+[gd_scene load_steps=24 format=3 uid="uid://b4fiwuqsy4pqd"]
 
 [ext_resource type="Script" path="res://compy.gd" id="1_eoanr"]
 [ext_resource type="Texture2D" uid="uid://cefvcht6f23iy" path="res://creataSprites/compyIdle/compy-idle-0.png" id="1_ndffx"]
@@ -16,6 +16,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8rj4t"]
 size = Vector2(22, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_371xo"]
+size = Vector2(16, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3dxea"]
 resource_local_to_scene = true
@@ -152,11 +155,15 @@ script = ExtResource("1_eoanr")
 position = Vector2(1, -6)
 shape = SubResource("RectangleShape2D_8rj4t")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_371xo")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_3dxea")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_24s8r")
-animation = &"Death"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="PlayerDetection" type="Area2D" parent="."]

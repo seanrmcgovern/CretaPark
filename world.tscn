@@ -656,7 +656,7 @@ position = Vector2(1613, 304)
 position = Vector2(1581, 304)
 
 [node name="Compy" parent="." instance=ExtResource("12_x8ej2")]
-position = Vector2(32, 304)
+position = Vector2(40, 304)
 metadata/_edit_lock_ = true
 
 [node name="Compy2" parent="." instance=ExtResource("12_x8ej2")]
