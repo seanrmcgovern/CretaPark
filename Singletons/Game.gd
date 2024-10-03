@@ -7,3 +7,5 @@ var defaultStartingAmmo = 100
 var ammo = defaultStartingAmmo
 
 var playerStateMachine: PlayerStateMachine
+
+var paused: bool = false

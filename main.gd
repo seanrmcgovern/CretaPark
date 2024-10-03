@@ -16,4 +16,7 @@ func _on_play_pressed():
 		
 	if Game.ammo <= 4:
 		Game.ammo = Game.defaultStartingAmmo
-	get_tree().change_scene_to_file("res://world.tscn")
+		
+	Game.paused = false
+	
+	get_tree().change_scene_to_file("res://world1_1.tscn")

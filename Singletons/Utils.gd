@@ -23,7 +23,19 @@ func loadGame():
 			if current_line:
 				Game.playerHP = current_line["playerHP"]
 				Game.gold = current_line["gold"]
-				Game.ammo = current_line["ammo"]
+				Game.ammo = current_line["ammo"]				
+
+func togglePauseMenu(menu: Control):
+	print_debug("toggle menu: ", Game.paused)
+	if Game.paused:
+		menu.hide()
+		get_tree().paused = false
+		#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	else:
+		menu.show()
+		get_tree().paused = true
+		#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Game.paused = !Game.paused
 	
 func duplicateAudioStreamPlayerForSingleUse(audioStreamPlayer: AudioStreamPlayer) -> void:
 	var newAudioPlayer: AudioStreamPlayer = audioStreamPlayer.duplicate()
