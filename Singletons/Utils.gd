@@ -25,13 +25,15 @@ func loadGame():
 				Game.gold = current_line["gold"]
 				Game.ammo = current_line["ammo"]				
 
+# maybe make a menu class with a audiostreamplayer property, to call here
 func togglePauseMenu(menu: Control):
-	print_debug("toggle menu: ", Game.paused)
 	if Game.paused:
+		duplicateAudioStreamPlayerForSingleUse(menu.resumeAudioStreamPlayer)
 		menu.hide()
 		get_tree().paused = false
 		#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	else:
+		duplicateAudioStreamPlayerForSingleUse(menu.pauseAudioStreamPlayer)
 		menu.show()
 		get_tree().paused = true
 		#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

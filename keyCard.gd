@@ -1,5 +1,6 @@
 extends Node2D
 
+var collected: bool = false
 
 @onready var keyCardAnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var audioStreamPlayer: AudioStreamPlayer = $AudioStreamPlayer
@@ -9,7 +10,9 @@ func _ready():
 	audioStreamPlayer.stream = collectSound
 
 func _on_area_2d_body_entered(body):
-	if (body.name == Common.Body.PLAYER):
+	if (body.name == Common.Body.PLAYER && !collected):
+		# mark as collected
+		collected = true
 		# play sound effect
 		Utils.duplicateAudioStreamPlayerForSingleUse(audioStreamPlayer)
 		# animate keyCard and mark as collected

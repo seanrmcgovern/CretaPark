@@ -516,10 +516,6 @@ process_mode = 3
 
 [node name="PauseMenu" parent="PauseCanvasLayer" instance=ExtResource("11_bfnd3")]
 visible = false
-offset_left = 496.0
-offset_top = 88.0
-offset_right = 496.0
-offset_bottom = 88.0
 
 [node name="Pausable" type="Node" parent="."]
 process_mode = 1
@@ -606,38 +602,46 @@ text = "100
 motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(1139.2, 0)
 script = ExtResource("5_sg7kg")
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Pausable/ParallaxBackground/ParallaxLayer4"]
 position = Vector2(569.4, 356)
 scale = Vector2(2.96667, 2.96667)
 texture = ExtResource("6_mf35t")
+metadata/_edit_lock_ = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Pausable/ParallaxBackground"]
 motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(1072, 0)
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Pausable/ParallaxBackground/ParallaxLayer"]
 position = Vector2(536, 336)
 scale = Vector2(2.79167, 2.8)
 texture = ExtResource("7_ugsi3")
+metadata/_edit_lock_ = true
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="Pausable/ParallaxBackground"]
 motion_scale = Vector2(0.5, 0.5)
 motion_mirroring = Vector2(640, 0)
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Pausable/ParallaxBackground/ParallaxLayer2"]
 position = Vector2(320, 304)
 scale = Vector2(1.66667, 1.66667)
 texture = ExtResource("8_ftmce")
+metadata/_edit_lock_ = true
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="Pausable/ParallaxBackground"]
 motion_scale = Vector2(0.8, 0.8)
 motion_mirroring = Vector2(589.6, 0)
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Pausable/ParallaxBackground/ParallaxLayer3"]
 position = Vector2(295.2, 303)
 scale = Vector2(1.53333, 1.53333)
 texture = ExtResource("9_cobq8")
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="Pausable" instance=ExtResource("12_p3tl0")]
 position = Vector2(424, 256)

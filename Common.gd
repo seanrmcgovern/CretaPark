@@ -4,7 +4,8 @@ class_name Common
 const Action: Dictionary = {
 	"DOWN": "down",
 	"JUMP": "jump",
-	"SHOOT": "shoot"
+	"SHOOT": "shoot",
+	"PAUSE": "pause",
 }
 
 const Body: Dictionary = {
