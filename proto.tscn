@@ -173,6 +173,14 @@ libraries = {
 "": SubResource("AnimationLibrary_l2d2c")
 }
 
+[node name="GroundRayCast1" type="RayCast2D" parent="."]
+position = Vector2(-31, 0)
+target_position = Vector2(0, 32)
+
+[node name="GroundRayCast2" type="RayCast2D" parent="."]
+position = Vector2(31, 0)
+target_position = Vector2(0, 32)
+
 [connection signal="body_entered" from="ProjectileDetection" to="." method="_on_projectile_detection_body_entered"]
 [connection signal="body_entered" from="OverworldDetection1" to="." method="_on_overworld_detection_1_body_entered"]
 [connection signal="body_entered" from="OverworldDetection2" to="." method="_on_overworld_detection_2_body_entered"]

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 #TODO: Look into pause menu/functionality
 
-const SPEED:float = 75.0
+const SPEED:float = 60.0
 
 # direction is an export var
 # which allows us to set the inital direction a protoceratops
@@ -25,6 +25,8 @@ var lastPosition: float = 0
 @onready var despawnAudioStreamPlayer: AudioStreamPlayer = $DespawnAudioStreamPlayer
 @onready var overworldDetection1: Area2D = $OverworldDetection1
 @onready var overworldDetection2: Area2D = $OverworldDetection2
+@onready var groundRayCast1: RayCast2D = $GroundRayCast1
+@onready var groundRayCast2: RayCast2D = $GroundRayCast2
 @onready var despawnSound = preload("res://Sounds/despawn.wav")
 @onready var player: Player = get_node("../Player")
 
@@ -37,6 +39,9 @@ func _physics_process(delta):
 		# Add the gravity.
 		if not is_on_floor():
 			velocity.y += gravity * delta
+		
+		if !groundRayCast1.is_colliding() || !groundRayCast2.is_colliding():
+			reverseDirection()
 
 		# protoceratops will pace back and forth
 		if !Game.playerStateMachine.currentState is PausedState:
@@ -83,7 +88,6 @@ func reverseDirection() -> void:
 func _on_overworld_detection_1_body_entered(body):
 	if direction == -1:
 		reverseDirection()
-
 
 func _on_overworld_detection_2_body_entered(body):
 	if direction == 1:

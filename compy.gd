@@ -7,7 +7,7 @@ extends CharacterBody2D
 # could drop randomized types of bones, meant to inspire the player to collect
 # the entire fossil
 
-const SPEED: float = 100.0
+const SPEED: float = 75.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
