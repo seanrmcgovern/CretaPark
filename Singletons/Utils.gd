@@ -45,3 +45,6 @@ func duplicateAudioStreamPlayerForSingleUse(audioStreamPlayer: AudioStreamPlayer
 	newAudioPlayer.play()
 	await newAudioPlayer.finished
 	newAudioPlayer.queue_free()
+	
+func increasePlayerHealth(amount: int):
+	Game.playerHP += amount
